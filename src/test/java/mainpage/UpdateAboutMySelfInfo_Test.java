@@ -20,21 +20,6 @@ public class UpdateAboutMySelfInfo_Test {
   private WebDriver driver;
   private Waiters waiters;
 
-
-  //  Шаги теста:
-  //  Открыть https://otus.ru
-  //  Авторизоваться на сайте
-  //Войти в личный кабинет
-  //В разделе "О себе" заполнить все поля "Личные данные" и добавить не менее двух контактов
-  //Нажать сохранить
-  //Открыть https://otus.ru в "чистом браузере"
-  //Авторизоваться на сайе
-  //Войти в личный кабинет
-  //Проверить, что в разделе "О себе" отображаются указанные ранее данные
-  //Домашнее задание принимается
-  // в виде ссылки на GitHub репозиторий
-
-
   @BeforeAll
 
   public static void manager() {
@@ -55,6 +40,7 @@ public class UpdateAboutMySelfInfo_Test {
 
   @AfterEach
   public void close() {
+    logger.info("Закрытие браузера");
     if (driver != null) {
       driver.close();
       driver.quit();
@@ -71,15 +57,24 @@ public class UpdateAboutMySelfInfo_Test {
 
     driver.manage().window().maximize();
 
-    loginOtusPage.openPage("/"); //переход на главную страницу
-    loginOtusPage.loginOtus();//авторизация
-    accountPage.entryLkOtus();//вход в личный кабинет
-    aboutMySelfPage.updateMySelf(); //Обновление данных о себе
+    loginOtusPage.openPage("/");
+    logger.info("Переход на главную страницу сайта Отус");
+    loginOtusPage.loginOtus();
+    logger.info("Авторизация");
+    accountPage.entryLkOtus();
+    logger.info("Вход в личный кабинет");
+    aboutMySelfPage.updateMySelf();
+    logger.info("Обновление данных 'О себе'");
     close();//закрываем браузер
+    logger.info("Закрытие браузера");
     init();//открываем браузер снова
+    logger.info("Повторное открытие браузера");
     loginOtusPage.openPage("/");//переход на главную страницу
+    logger.info("Повторно Переход на главную страницу сайта Отус");
     loginOtusPage.loginOtus();//авторизация
+    logger.info("Повторно Авторизация");
     accountPage.entryLkOtus();//вход в личный кабинет
+    logger.info("Повторно Вход в личный кабинет");
     aboutMySelfPage.assertMySelfData();
 
   }
