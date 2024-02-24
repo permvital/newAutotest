@@ -60,7 +60,7 @@ public class AboutMySelfPage extends GeneralPage {
   public void addCommunicationMethod(String[] communicationМethod, int i) {
     //выполняем метод добавления
 //    driver.findElement(By.xpath("/html/body/div[1]/div/div[4]/div[3]/div[2]/div[2]/div/form/div[1]/div[3]/div[2]/div[2]/button")).click();
-    driver.findElement(By.xpath("//span[@placeholder=(text(),'Способ связи')]")).click();
+    driver.findElement(By.xpath("//div[label/div/span[text()='Способ связи']]")).click();
     WebElement element = driver.findElement(By.xpath(String.format("//div[not(contains(@class,'hide'))]/div/button[@title='%s']", communicationМethod[0])));
     waiters.waitElementVisible(element);
     element.click();
