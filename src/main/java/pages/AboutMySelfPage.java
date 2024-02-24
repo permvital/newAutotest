@@ -31,7 +31,7 @@ public class AboutMySelfPage extends GeneralPage {
   private final String company = "Тест";
   private final String jobTitle = "Тестировщик";
   private final String[] communicationМethod1 = new String[]{"VK", "vk.com/test"};
-  private final String[] communicationМethod2 = new String[]{"Telegram", "t.me/test"};
+  private final String[] communicationМethod2 = new String[]{"OK", "OK.ru/test"};
 
   //////////локаторы
   private final String jobFormatFullInpulLocator = "//input[@name='work_schedule' and @value='full']";
@@ -49,16 +49,30 @@ public class AboutMySelfPage extends GeneralPage {
     super(driver);
   }
 
-  public void addCommunicationMethod(String[] communicationМethod, int i) {
+  public void deleteSposobSvyazi() {
+    if (driver.findElement(By.xpath("(//button[text()='Удалить'])[2]")).isDisplayed()) {
+      driver.findElement(By.xpath("(//button[text()='Удалить'])[2]")).click();
+    }
+    if (driver.findElement(By.xpath("(//button[text()='Удалить'])[4]")).isDisplayed()) {
+      driver.findElement(By.xpath("(//button[text()='Удалить'])[4]")).click();
+      driver.findElement(By.xpath("//button[text()='Добавить']")).click();
+    }
+  }
 
-    driver.findElement(By.xpath("//div[label/div/span[text()='Способ связи']]")).click();
-    WebElement element = driver.findElement(By.xpath(String.format("//div[not(contains(@class,'hide'))]/div/button[@title='%s']", communicationМethod[0])));
-    waiters.waitElementVisible(element);
-    element.click();
-    waiters.waitElementVisible(driver.findElement(By.xpath(String.format("//input[@name='contact-%d-value']", i))));
-    cleanAndEnter(By.xpath(String.format("//input[@name='contact-%d-value']", i)), communicationМethod[1]);
+  public void addCommunicationMethod() {
+    driver.findElement(By.xpath("//span[text()='Способ связи']")).click();
+    WebElement elementOne = driver.findElement(By.xpath(String.format("//div[not(contains(@class,'hide'))]/div/button[@title='VK']")));
+    waiters.waitElementVisible(elementOne);
+    elementOne.click();
+    waiters.waitElementVisible(driver.findElement(By.xpath(String.format("//input[@name='contact-2-value']"))));
+    cleanAndEnter(By.xpath(String.format("//input[@name='contact-2-value']")), "vk.com/test");
     driver.findElement(By.xpath("//button[text()='Добавить']")).click();
-
+    driver.findElement(By.xpath("//span[text()='Способ связи']")).click();
+    WebElement elementTwo = driver.findElement(By.xpath(String.format("//div[not(contains(@class,'hide'))]/div/button[@title='OK']")));
+    waiters.waitElementVisible(elementTwo);
+    elementTwo.click();
+    waiters.waitElementVisible(driver.findElement(By.xpath(String.format("//input[@name='contact-3-value']"))));
+    cleanAndEnter(By.xpath(String.format("//input[@name='contact-3-value']")), "OK.ru/test");
   }
 
   public void updateMySelf() throws NoSuchElementException, InterruptedException {
@@ -126,9 +140,9 @@ public class AboutMySelfPage extends GeneralPage {
     checkStateAndClickCheckbox(jobFormat[1], jobFormatFlexibleInpulLocator, jobFormatFlexibleDivLocator);
     checkStateAndClickCheckbox(jobFormat[2], jobFormatRemoteInpulLocator, jobFormatRemoteDivLocator);
     ///добавление контактов
-    addCommunicationMethod(communicationМethod1, 0);
+    deleteSposobSvyazi();
+    addCommunicationMethod();
     js.executeScript("window.scrollBy(0,700)");
-    addCommunicationMethod(communicationМethod2, 1);
 
     ///пол
     waiters.waitElementVisible(driver.findElement(By.id("id_gender")));

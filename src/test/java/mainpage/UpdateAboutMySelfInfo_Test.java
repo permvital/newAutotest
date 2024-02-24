@@ -17,7 +17,7 @@ public class UpdateAboutMySelfInfo_Test {
   private static final Logger logger = (Logger) LogManager.getLogger(UpdateAboutMySelfInfo_Test.class);
 
 
-  private WebDriver driver;
+  private static WebDriver driver;
   private Waiters waiters;
 
 
@@ -45,31 +45,31 @@ public class UpdateAboutMySelfInfo_Test {
   }
 
 
-  @BeforeEach
+//  @BeforeEach
   public void init() {
 
     driver = new WebDriverFactory().create();
     this.waiters = new Waiters(driver);
-    driver.manage().window().maximize();
+//    driver.manage().window().maximize();
   }
 
   @AfterEach
   public void close() {
     if (driver != null) {
       driver.close();
-      driver.quit();
+//      driver.quit();
     }
   }
 
 
   @Test
   public void checkUpdateInfo() throws InterruptedException {
-
+    init();
     LoginOtusPage loginOtusPage = new LoginOtusPage(driver);
     AccountPage accountPage = new AccountPage(driver);
     AboutMySelfPage aboutMySelfPage = new AboutMySelfPage(driver);
 
-    driver.manage().window().maximize();
+//    driver.manage().window().maximize();
 
     loginOtusPage.openPage("/"); //переход на главную страницу
     loginOtusPage.loginOtus();//авторизация

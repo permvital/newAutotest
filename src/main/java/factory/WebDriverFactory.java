@@ -23,6 +23,9 @@ public class WebDriverFactory {
       case CHROME: {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
+        chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.addArguments("--incognito");
+        chromeOptions.addArguments("--remote-allow-origins=*");
         return new ChromeDriver(chromeOptions);
       }
       case FIREFOX: {

@@ -11,7 +11,7 @@ import pageobject.AbsPageObject;
 
 public abstract class GeneralPage extends AbsPageObject {
 
-  private final String BASE_URL = System.getProperty("base.url", "https://otus.ru");
+  private static final String BASE_URL = System.getProperty("base.url", "https://otus.ru");
   public static final Logger logger = (Logger) LogManager.getLogger(GeneralPage.class);
 
   public GeneralPage(WebDriver driver) {
@@ -31,8 +31,8 @@ public abstract class GeneralPage extends AbsPageObject {
 
   }
 
-  public void openPage(String path) {
-    driver.get(BASE_URL + path);
+  public static void openPage(String name) {
+    driver.get(BASE_URL + name);
   }
 
   public void checkStateAndClickCheckbox(boolean mustBeState, String inputLocator, String divLocator) {

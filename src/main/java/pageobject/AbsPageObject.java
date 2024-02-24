@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import waiters.Waiters;
 
 public abstract class AbsPageObject {
-  protected WebDriver driver;
+  protected static WebDriver driver;
   protected Waiters waiters;
 
 
