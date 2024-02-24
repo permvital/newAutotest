@@ -12,6 +12,8 @@ import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 
+import static java.lang.Thread.sleep;
+
 public class AboutMySelfPage extends GeneralPage {
   private static final Logger logger = (Logger) LogManager.getLogger(AboutMySelfPage.class);
   //////////исходные данные
@@ -59,7 +61,7 @@ public class AboutMySelfPage extends GeneralPage {
 
   }
 
-  public void updateMySelf() throws NoSuchElementException {
+  public void updateMySelf() throws NoSuchElementException, InterruptedException {
 
     cleanAndEnter(By.id("id_fname_latin"), nameLat);
     cleanAndEnter(By.id("id_lname"), surname);
@@ -92,23 +94,26 @@ public class AboutMySelfPage extends GeneralPage {
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     RussiaCityData russiaCityData = RussiaCityData.valueOf(city);
     String cityStr = russiaCityData.getName();
+    sleep(1000);
     ////////выбор города
     WebElement cityElement = driver.findElement(By.xpath("//div[label/input[@name='city']]"));
     waiters.waitElementVisible(cityElement);
     cityElement.click();
-
+    sleep(1000);
     WebElement cityButton = driver.findElement(By.xpath(String.format("//button[@title='%s']", cityStr)));
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+//    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     waiters.waitElementVisible(cityButton);
     cityButton.click();
+    sleep(1000);
     /////////уровень английского
     EnglishLevelData englishLevelData = EnglishLevelData.valueOf(englishLevel);
     WebElement englishLevelElement = driver.findElement(By.xpath("//div[label/input[@name='english_level']]"));
     waiters.waitElementVisible(englishLevelElement);
     englishLevelElement.click();
+    sleep(1000);
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     driver.findElement(By.xpath(String.format("//button[@title='%s']", englishLevelData.getName()))).click();
-
+    sleep(1000);
     //готов к переезду
 
     if (readyToMove) {
