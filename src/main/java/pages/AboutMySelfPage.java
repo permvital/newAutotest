@@ -12,6 +12,8 @@ import org.openqa.selenium.interactions.Actions;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 
+import static java.lang.Thread.sleep;
+
 public class AboutMySelfPage extends GeneralPage {
   private static final Logger logger = (Logger) LogManager.getLogger(AboutMySelfPage.class);
   //////////исходные данные
@@ -28,8 +30,8 @@ public class AboutMySelfPage extends GeneralPage {
   private final String sex = "m";
   private final String company = "Тест";
   private final String jobTitle = "Тестировщик";
-  private final String[] communicationМethod1 = new String[]{"VK", "vk.com/test"};
-  private final String[] communicationМethod2 = new String[]{"Telegram", "t.me/test"};
+  private final String[] communicationМethod1 = new String[]{"VK", "vk.ru/test"};
+  private final String[] communicationМethod2 = new String[]{"OK", "ok.ru/test"};
 
   //////////локаторы
   private final String jobFormatFullInpulLocator = "//input[@name='work_schedule' and @value='full']";
@@ -41,15 +43,24 @@ public class AboutMySelfPage extends GeneralPage {
   private final String communicationMethodTypeLocator = "//div/label/div[contains(text(),'%s')]";
   private final String communicationMethodStringLocator = "//div[div/label/div[contains(text(),'%s')]]/input";
 
-  //////////////////////
-
   public AboutMySelfPage(WebDriver driver) {
     super(driver);
   }
-
+//  public void deleteKontakt() {
+//    if ((driver.findElement(By.xpath("(//div[contains(text(),'VK')]//..//..//..//..//..//..//button[contains(text(),'Удалить')])[1]")).isDisplayed())) {
+//      //нажимаем кнопку Удалить
+//      driver.findElement(By.xpath("(//div[contains(text(),'VK')]//..//..//..//..//..//..//button[contains(text(),'Удалить')])[1]")).click();
+//    }
+//    //если нет поля "ок"
+//    if ((driver.findElement(By.xpath("(//div[contains(text(),'OK')]//..//..//..//..//..//..//button[contains(text(),'Удалить')])[1]")).isDisplayed())) {
+//      //нажимаем кнопку Удалить
+//      driver.findElement(By.xpath("(//div[contains(text(),'OK')]//..//..//..//..//..//..//button[contains(text(),'Удалить')])[1]")).click();
+//    }
+//  }
   public void addCommunicationMethod(String[] communicationМethod, int i) {
-
-    driver.findElement(By.xpath("//div[label/div/span[text()='Способ связи']]")).click();
+    //выполняем метод добавления
+//    driver.findElement(By.xpath("/html/body/div[1]/div/div[4]/div[3]/div[2]/div[2]/div/form/div[1]/div[3]/div[2]/div[2]/button")).click();
+    driver.findElement(By.xpath("//span[@placeholder=(text(),'Способ связи')]")).click();
     WebElement element = driver.findElement(By.xpath(String.format("//div[not(contains(@class,'hide'))]/div/button[@title='%s']", communicationМethod[0])));
     waiters.waitElementVisible(element);
     element.click();
@@ -59,7 +70,7 @@ public class AboutMySelfPage extends GeneralPage {
 
   }
 
-  public void updateMySelf() throws NoSuchElementException {
+  public void updateMySelf() throws NoSuchElementException, InterruptedException {
 
     cleanAndEnter(By.id("id_fname_latin"), nameLat);
     cleanAndEnter(By.id("id_lname"), surname);
@@ -89,7 +100,8 @@ public class AboutMySelfPage extends GeneralPage {
         .perform();
     countryButton.click();
 
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+    sleep (1000);
+
     RussiaCityData russiaCityData = RussiaCityData.valueOf(city);
     String cityStr = russiaCityData.getName();
     ////////выбор города
@@ -97,8 +109,9 @@ public class AboutMySelfPage extends GeneralPage {
     waiters.waitElementVisible(cityElement);
     cityElement.click();
 
+    sleep (1000);
+
     WebElement cityButton = driver.findElement(By.xpath(String.format("//button[@title='%s']", cityStr)));
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     waiters.waitElementVisible(cityButton);
     cityButton.click();
     /////////уровень английского
@@ -106,8 +119,9 @@ public class AboutMySelfPage extends GeneralPage {
     WebElement englishLevelElement = driver.findElement(By.xpath("//div[label/input[@name='english_level']]"));
     waiters.waitElementVisible(englishLevelElement);
     englishLevelElement.click();
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     driver.findElement(By.xpath(String.format("//button[@title='%s']", englishLevelData.getName()))).click();
+
+    sleep (1000);
 
     //готов к переезду
 
@@ -121,6 +135,7 @@ public class AboutMySelfPage extends GeneralPage {
     checkStateAndClickCheckbox(jobFormat[1], jobFormatFlexibleInpulLocator, jobFormatFlexibleDivLocator);
     checkStateAndClickCheckbox(jobFormat[2], jobFormatRemoteInpulLocator, jobFormatRemoteDivLocator);
     ///добавление контактов
+//    deleteKontakt ();
     addCommunicationMethod(communicationМethod1, 0);
     js.executeScript("window.scrollBy(0,700)");
     addCommunicationMethod(communicationМethod2, 1);
@@ -131,10 +146,8 @@ public class AboutMySelfPage extends GeneralPage {
     cleanAndEnter(By.id("id_company"), company);
     cleanAndEnter(By.id("id_work"), jobTitle);
 
-    //сoхраняемся
+    //сoхранение
     driver.findElement(By.xpath("//button[@name='continue']")).click();
-
-
   }
 
 
