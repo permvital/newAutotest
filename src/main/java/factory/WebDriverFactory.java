@@ -10,12 +10,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class WebDriverFactory {
   private static final Logger logger = (Logger) LogManager.getLogger(WebDriverFactory.class);
-  private static final String BROWSER_NAME = System.getProperty("browser");
-
+  private static final String BROWSER_URL = System.getProperty("browser", "CHROME").toUpperCase();
 
 
   public static WebDriver create() {
-    BrowserData browserData = BrowserData.valueOf(BROWSER_NAME.toUpperCase());
+    BrowserData browserData = BrowserData.valueOf(BROWSER_URL.toUpperCase());
     WebDriver driver = null;
 
     switch (browserData) {
