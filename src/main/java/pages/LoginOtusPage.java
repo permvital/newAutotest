@@ -26,6 +26,7 @@ public class LoginOtusPage extends GeneralPage {
 
   public void loginOtus() {
     try {
+      logger.info("Авторизация");
       driver.findElement(By.xpath(enterButtonLocator)).click();
       driver.findElement(By.xpath("//*[@id=\"__PORTAL__\"]/div/div/div[3]/div[2]/div/div[2]/div[1]/div/div[1]/div/div[1]/div")).click();
       cleanAndEnter(By.xpath(inputEmailLocator), LOGIN);
@@ -33,7 +34,6 @@ public class LoginOtusPage extends GeneralPage {
       cleanAndEnter(By.xpath(inputPassLocator), PASSWORD);
       driver.findElement(By.cssSelector("button[type=button] div.sc-9a4spb-2"));
     } catch (Exception e) {
-      logger.info(e.getMessage());
     }
   }
 

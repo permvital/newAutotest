@@ -50,6 +50,7 @@ public class AboutMySelfPage extends GeneralPage {
   }
 
   public void deleteSposobSvyazi() {
+    logger.info("Очистка контактов");
     if (driver.findElement(By.xpath("(//button[text()='Удалить'])[2]")).isDisplayed()) {
       driver.findElement(By.xpath("(//button[text()='Удалить'])[2]")).click();
     }
@@ -60,6 +61,7 @@ public class AboutMySelfPage extends GeneralPage {
   }
 
   public void addCommunicationMethod() {
+    logger.info("Добавление контактов");
     driver.findElement(By.xpath("//span[text()='Способ связи']")).click();
     WebElement elementOne = driver.findElement(By.xpath(String.format("//div[not(contains(@class,'hide'))]/div/button[@title='VK']")));
     waiters.waitElementVisible(elementOne);
@@ -76,6 +78,7 @@ public class AboutMySelfPage extends GeneralPage {
   }
 
   public void updateMySelf() throws NoSuchElementException, InterruptedException {
+    logger.info("Обновление данных в разделе 'О себе'");
 
     cleanAndEnter(By.id("id_fname_latin"), nameLat);
     cleanAndEnter(By.id("id_lname"), surname);
@@ -158,6 +161,7 @@ public class AboutMySelfPage extends GeneralPage {
 
 
   public void assertMySelfData() throws NoSuchElementException {
+    logger.info("Чек введенных ранее данных в разделе 'О себе'");
 
     Assertions.assertEquals(nameLat,
         driver.findElement(By.id("id_fname_latin")).getAttribute("value"), "nameLat is right");
