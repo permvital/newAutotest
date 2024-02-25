@@ -59,23 +59,33 @@ public class UpdateAboutMySelfInfo_Test {
 
     loginOtusPage.openPage("/");
     logger.info("Переход на главную страницу сайта Отус");
+
     loginOtusPage.loginOtus();
     logger.info("Авторизация");
+
     accountPage.entryLkOtus();
     logger.info("Вход в личный кабинет");
+
     aboutMySelfPage.updateMySelf();
     logger.info("Обновление данных 'О себе'");
-    close();//закрываем браузер
+
+    close();
     logger.info("Закрытие браузера");
-    init();//открываем браузер снова
+
+    init();
     logger.info("Повторное открытие браузера");
-    loginOtusPage.openPage("/");//переход на главную страницу
+
+    loginOtusPage.openPage("/");
     logger.info("Повторно Переход на главную страницу сайта Отус");
-    loginOtusPage.loginOtus();//авторизация
+
+    loginOtusPage.loginOtus();
     logger.info("Повторно Авторизация");
-    accountPage.entryLkOtus();//вход в личный кабинет
+
+    accountPage.entryLkOtus();
     logger.info("Повторно Вход в личный кабинет");
+
     aboutMySelfPage.assertMySelfData();
+    logger.info("Проверка внесенных ранее данных");
 
   }
 
