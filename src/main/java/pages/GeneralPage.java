@@ -20,12 +20,10 @@ public abstract class GeneralPage extends AbsPageObject {
 
   public void cleanAndEnter(By by, String sendedKey) {
     WebElement element = driver.findElement(by);
-    //   waiters.waitElementVisible(element);
     new Actions(driver).moveToElement(element)
         .click()
         .perform();
     waiters.waitElementVisible(element);
-    //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     element.clear();
     element.sendKeys(sendedKey);
 

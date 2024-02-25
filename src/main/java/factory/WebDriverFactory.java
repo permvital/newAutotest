@@ -1,26 +1,26 @@
 package factory;
 
 import data.BrowserData;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import pages.AboutMySelfPage;
-
-import java.util.Locale;
 
 public class WebDriverFactory {
   private static final Logger logger = (Logger) LogManager.getLogger(WebDriverFactory.class);
-  private final String BROWSER_NAME = System.getProperty("browser", "firefox");
+  private static final String BROWSER_NAME = System.getProperty("browser");
 
 
-  public WebDriver create() {
+
+  public static WebDriver create() {
     BrowserData browserData = BrowserData.valueOf(BROWSER_NAME.toUpperCase());
+    WebDriver driver = null;
+
     switch (browserData) {
       case CHROME: {
+        WebDriverManager.chromedriver().setup();
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--start-maximized");
         chromeOptions.addArguments("--disable-dev-shm-usage");
@@ -28,13 +28,7 @@ public class WebDriverFactory {
         chromeOptions.addArguments("--remote-allow-origins=*");
         return new ChromeDriver(chromeOptions);
       }
-      case FIREFOX: {
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.addArguments("--start-maximized");
-        return new FirefoxDriver(firefoxOptions);
-      }
     }
-
     return null;
   }
 }
