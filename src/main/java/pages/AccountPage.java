@@ -18,7 +18,6 @@ public class AccountPage extends GeneralPage {
   }
 
   public void entryLkOtus() {
-    logger.info("Вход в ЛК ОТУС");
     driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
     WebElement enter = driver.findElement(By.cssSelector("#__PORTAL__ > div > div > div.sc-1alnis6-1.ejcuap > div.sc-1alnis6-4.iVBbVz > div > div.sc-10p60tv-1.eDzhKh > div.sc-10p60tv-2.bQGCmu > div > button"));
     enter.click();

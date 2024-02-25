@@ -25,7 +25,6 @@ public class LoginOtusPage extends GeneralPage {
 
 
   public void loginOtus() {
-    logger.info("Login OTUS");
     try {
       driver.findElement(By.xpath(enterButtonLocator)).click();
       driver.findElement(By.xpath("//*[@id=\"__PORTAL__\"]/div/div/div[3]/div[2]/div/div[2]/div[1]/div/div[1]/div/div[1]/div")).click();
