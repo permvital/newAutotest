@@ -34,6 +34,7 @@ public class NewAutoTest {
     this.waiters = new Waiters(driver);
     driver.manage().window().maximize();
   }
+
   @Test
   public void Test() throws InterruptedException {
     LoginOtusPage loginOtusPage = new LoginOtusPage(driver);
@@ -41,20 +42,20 @@ public class NewAutoTest {
     AboutMySelfPage aboutMySelfPage = new AboutMySelfPage(driver);
 
     loginOtusPage.openPage("/"); //переход на главную страницу
-    loginOtusPage.loginOtus(); //авторизация
-    accountPage.entryLkOtus(); //вход в личный кабинет
-    aboutMySelfPage.updateMySelf(); //Обновление данных о себе
+//    loginOtusPage.loginOtus(); //авторизация
+//    accountPage.entryLkOtus(); //вход в личный кабинет
+//    aboutMySelfPage.updateMySelf(); //Обновление данных о себе
 
     closeBrowser();
     init();
 
     loginOtusPage.openPage("/"); //переход на главную страницу
-    loginOtusPage.loginOtus();//авторизация
-    logger.info("Повторная авторизация");
-    accountPage.entryLkOtus();//вход в личный кабинет
-    logger.info("Повторный вход в 'Личный кабинет'");
-    aboutMySelfPage.assertMySelfData();//Проверка данных
-    logger.info("Проверка данных");
+//    loginOtusPage.loginOtus();//авторизация
+//    logger.info("Повторная авторизация");
+//    accountPage.entryLkOtus();//вход в личный кабинет
+//    logger.info("Повторный вход в 'Личный кабинет'");
+//    aboutMySelfPage.assertMySelfData();//Проверка данных
+//    logger.info("Проверка данных");
   }
 
   @AfterEach

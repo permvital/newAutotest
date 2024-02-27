@@ -25,9 +25,9 @@ public class WebDriverFactory {
         chromeOptions.addArguments("--disable-dev-shm-usage");
         chromeOptions.addArguments("--incognito");
         chromeOptions.addArguments("--remote-allow-origins=*");
-        return new ChromeDriver(chromeOptions);
+        break;
       }
     }
-    return null;
+    return driver;
   }
 }

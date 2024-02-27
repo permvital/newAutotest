@@ -29,8 +29,8 @@ public abstract class GeneralPage extends AbsPageObject {
 
   }
 
-  public static void openPage(String name) {
-    driver.get(BASE_URL + name);
+  public static void openPage(String path) {
+    driver.get(BASE_URL + path);
   }
 
   public void checkStateAndClickCheckbox(boolean mustBeState, String inputLocator, String divLocator) {
