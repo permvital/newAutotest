@@ -15,7 +15,7 @@ public class WebDriverFactory {
 
   public static WebDriver create() {
     BrowserData browserData = BrowserData.valueOf(BROWSER_URL.toUpperCase());
-    WebDriver driver = null;
+    WebDriver driver = new ChromeDriver();
 
     switch (browserData) {
       case CHROME: {

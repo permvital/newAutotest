@@ -16,7 +16,8 @@ import static java.lang.Thread.sleep;
 
 public class AboutMySelfPage extends GeneralPage {
   private static final Logger logger = (Logger) LogManager.getLogger(AboutMySelfPage.class);
-  //////////исходные данные
+
+  //исходные данные
   private final String nameLat = "Testvit";
   private final String surname = "Тесттест";
   private final String surnameLat = "testtest";
